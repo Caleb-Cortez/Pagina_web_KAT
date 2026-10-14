@@ -1,0 +1,217 @@
+/* --- CONCEPTO: EL COFRE NOCTURNO (ESCRITORIO NOCTURNO) --- */
+
+/* Fondo de partículas sutil, siempre detrás del contenido */
+#ambient-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.85;
+}
+
+#main-app {
+    position: relative;
+    z-index: 1;
+}
+
+/* Cabecera del escritorio (reutiliza el estilo de letras) */
+.letters-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.letters-badge {
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    color: var(--accent-ice);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.letters-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    color: #FFFFFF;
+    margin-bottom: 0.5rem;
+}
+
+.letters-subtitle {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    font-weight: 300;
+}
+
+/* Superficie de la mesa nocturna */
+.desk-surface-wrapper {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    position: relative;
+    border-radius: 28px;
+    background:
+        radial-gradient(ellipse at 50% 0%, rgba(122, 156, 198, 0.12) 0%, transparent 55%),
+        radial-gradient(ellipse at 50% 120%, rgba(0, 0, 0, 0.55) 0%, transparent 60%);
+    box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.55);
+}
+
+.desk-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
+    margin-top: 3rem;
+    position: relative;
+}
+
+/* Objeto individual sobre el escritorio */
+.desk-item {
+    background: linear-gradient(145deg, rgba(14, 22, 45, 0.9), rgba(7, 12, 26, 0.95));
+    border: 1px solid rgba(163, 193, 225, 0.15);
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(163, 193, 225, 0.1);
+}
+
+/* Luz ambiental (resplandor al hacer hover) */
+.desk-item .item-glow {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(163, 193, 225, 0.08) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.desk-item:hover .item-glow {
+    opacity: 1;
+}
+
+.desk-item:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: rgba(224, 195, 120, 0.4);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 0 0 25px rgba(163, 193, 225, 0.15);
+}
+
+/* Sobre con sello de cera */
+.envelope-graphic {
+    width: 75px;
+    height: 50px;
+    background: rgba(163, 193, 225, 0.1);
+    border: 1px solid rgba(163, 193, 225, 0.3);
+    border-radius: 6px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.8rem;
+    transition: transform 0.4s ease;
+}
+
+.desk-item:hover .envelope-graphic {
+    transform: scale(1.1) rotate(3deg);
+}
+
+.wax-seal {
+    width: 24px;
+    height: 24px;
+    background: radial-gradient(circle at 35% 30%, #e05a5a, #c53030 70%);
+    border: 1px solid #e2e8f0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.65rem;
+    color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    animation: sealPulse 3s ease-in-out infinite;
+}
+
+@keyframes sealPulse {
+    0%, 100% {
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5), 0 0 0 rgba(224, 195, 120, 0);
+        filter: brightness(1);
+    }
+    50% {
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5), 0 0 16px rgba(224, 195, 120, 0.7);
+        filter: brightness(1.15);
+    }
+}
+
+/* Caja de iconos para los demás objetos */
+.object-icon-box {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(163, 193, 225, 0.08);
+    border: 1px solid rgba(163, 193, 225, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--accent-ice);
+    margin-bottom: 1.8rem;
+    transition: all 0.4s ease;
+}
+
+.desk-item:hover .object-icon-box {
+    background: rgba(224, 195, 120, 0.15);
+    border-color: #E0C378;
+    color: #E0C378;
+    transform: scale(1.1) rotate(-5deg);
+}
+
+/* Textos dentro del objeto */
+.item-info h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    color: #FFFFFF;
+    margin-bottom: 0.6rem;
+}
+
+.item-info p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+}
+
+.item-action {
+    font-size: 0.85rem;
+    color: var(--accent-ice);
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: letter-spacing 0.3s ease, color 0.3s ease;
+}
+
+.desk-item:hover .item-action {
+    color: #E0C378;
+    letter-spacing: 1.5px;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+    .desk-surface-wrapper {
+        padding: 1.5rem 0.5rem;
+    }
+
+    .letters-header h2 {
+        font-size: 1.7rem;
+    }
+}

@@ -1,0 +1,321 @@
+/* --- EASTER EGGS SUTILES Y PROFESIONALES --- */
+
+/* Botones flotantes discretos y translúcidos */
+.easter-btn {
+    position: fixed;
+    bottom: 1.2rem;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(11, 19, 43, 0.3); /* Casi invisible contra el fondo */
+    border: 1px solid rgba(163, 193, 225, 0.12); /* Borde sutil */
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    color: rgba(163, 193, 225, 0.35); /* Color atenuaod */
+    cursor: pointer;
+    z-index: 800;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Revelado elegante al pasar el cursor */
+.easter-btn:hover {
+    transform: scale(1.15);
+    background: rgba(18, 28, 56, 0.9);
+    border-color: var(--accent-ice);
+    color: var(--accent-ice);
+    box-shadow: 0 0 20px rgba(163, 193, 225, 0.4);
+}
+
+.jar-btn { left: 1.2rem; }
+.star-btn { right: 1.2rem; }
+
+/* Canvas de estrellas flotantes para la animación de fondo */
+#starry-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+#starry-canvas.active { opacity: 1; }
+
+/* Modal emergente secreto */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(7, 12, 26, 0.85);
+    backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    opacity: 1;
+    transition: opacity 0.4s ease;
+    padding: 1.5rem;
+}
+
+.modal-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal-card {
+    background: var(--surface);
+    border: 1px solid rgba(163, 193, 225, 0.3);
+    border-radius: 16px;
+    padding: 2.5rem 2rem;
+    max-width: 500px;
+    width: 100%;
+    position: relative;
+    text-align: center;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.7);
+    animation: modalPop 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalPop {
+    from { transform: scale(0.85); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1.2rem;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.modal-close:hover { color: var(--accent-ice); }
+
+.modal-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    color: var(--accent-ice);
+    margin-bottom: 1rem;
+}
+
+.modal-body {
+    color: var(--text-main);
+    font-size: 1rem;
+    line-height: 1.6;
+    font-weight: 300;
+}
+
+/* --- EASTER EGG: resplandor del mensaje secreto (doble clic) --- */
+.secret-glow {
+    animation: secretPulse 2.2s ease;
+    color: #E0C378 !important;
+}
+
+@keyframes secretPulse {
+    0% {
+        text-shadow: 0 0 0 rgba(224, 195, 120, 0);
+        transform: scale(1);
+    }
+    30% {
+        text-shadow: 0 0 22px rgba(224, 195, 120, 0.85);
+        transform: scale(1.04);
+    }
+    100% {
+        text-shadow: 0 0 0 rgba(224, 195, 120, 0);
+        transform: scale(1);
+        color: var(--text-main);
+    }
+}
+
+/* --- EASTER EGG: sello del pergamino clicable --- */
+.pergamino-seal {
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.3s ease, text-shadow 0.3s ease;
+    user-select: none;
+}
+
+.pergamino-seal:hover {
+    color: #E0C378;
+    text-shadow: 0 0 14px rgba(224, 195, 120, 0.6);
+}
+
+/* --- EASTER EGG: corazón que crece y se vuelve dorado con los segundos --- */
+.idle-egg {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translate(-50%, 20px) scale(0.1);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: rgba(224, 195, 120, 0.35);
+    background: rgba(11, 19, 43, 0.5);
+    border: 1px solid rgba(224, 195, 120, 0.18);
+    backdrop-filter: blur(6px);
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    z-index: 850;
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.idle-egg.show {
+    visibility: visible;
+    pointer-events: auto;
+    animation:
+        idleCharge 20s linear forwards,
+        idleFloat 3s ease-in-out 20s infinite;
+}
+
+.idle-egg:hover {
+    color: #FFD982;
+    border-color: #FFD982;
+    box-shadow: 0 0 26px rgba(224, 195, 120, 0.6);
+}
+
+@keyframes idleCharge {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, 20px) scale(0.1);
+        color: rgba(224, 195, 120, 0.35);
+        box-shadow: 0 0 8px rgba(224, 195, 120, 0.15);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, 0) scale(1);
+        color: #FFD982;
+        box-shadow: 0 0 32px rgba(224, 195, 120, 0.75);
+    }
+}
+
+@keyframes idleFloat {
+    0%, 100% { transform: translate(-50%, 0) scale(1); }
+    50% { transform: translate(-50%, -6px) scale(1.06); }
+}
+
+/* --- EASTER EGG: pantalla "Te has quedado varada" --- */
+.stranded-overlay {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at 50% 30%, #101D3D 0%, #060A18 70%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3000;
+    padding: 1.5rem;
+}
+
+.stranded-card {
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+    background: rgba(18, 28, 56, 0.85);
+    border: 1px solid rgba(224, 195, 120, 0.3);
+    border-radius: 18px;
+    padding: 3rem 2rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 35px rgba(224, 195, 120, 0.15);
+    animation: modalPop 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stranded-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 0 18px rgba(163, 193, 225, 0.5));
+    animation: floatSymbol 3s infinite ease-in-out alternate;
+}
+
+.stranded-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    color: #E0C378;
+    margin-bottom: 0.8rem;
+}
+
+.stranded-desc {
+    color: rgba(237, 242, 248, 0.75);
+    font-weight: 300;
+    line-height: 1.6;
+    margin-bottom: 1.8rem;
+}
+
+.stranded-label {
+    display: block;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+}
+
+.stranded-input {
+    width: 100%;
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    background: rgba(11, 19, 43, 0.7);
+    color: var(--accent-ice);
+    border: 1px solid rgba(163, 193, 225, 0.35);
+    border-radius: 12px;
+    padding: 0.9rem 0.5rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.stranded-input:focus {
+    border-color: #E0C378;
+    box-shadow: 0 0 18px rgba(224, 195, 120, 0.35);
+}
+
+.stranded-input::placeholder {
+    color: rgba(140, 166, 203, 0.45);
+    letter-spacing: 3px;
+}
+
+.stranded-hint {
+    margin-top: 1rem;
+    color: rgba(140, 166, 203, 0.6);
+    font-size: 0.85rem;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+}
+
+/* --- EASTER EGG: lluvia de corazones (código Konami) --- */
+.konami-heart {
+    position: fixed;
+    bottom: -40px;
+    z-index: 4000;
+    pointer-events: none;
+    animation: konamiUp 3s ease-in forwards;
+}
+
+@keyframes konamiUp {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-110vh) rotate(320deg);
+        opacity: 0;
+    }
+}
